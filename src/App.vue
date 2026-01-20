@@ -24,8 +24,7 @@ const engagement = ref("");
 const acteur = ref("");
 const message = ref("");
 
-const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbxVgDdTS0lKvACu_DUUI-2uES42Zyy3VRNx0monhSj_5-OPIaLTRd4COO2SxwjKqBUhyg/exec";
+const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
 
 async function submitForm() {
   try {
