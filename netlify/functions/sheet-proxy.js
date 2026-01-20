@@ -26,13 +26,18 @@ export async function handler(event) {
       body: text,
     };
   } catch (err) {
-    console.error("Erreur complète :", err);
+    console.error("Function crash:", err);
 
-    if (err.response) {
-      console.error("Status :", err.response.status);
-      console.error("Data :", err.response.data);
-    } else {
-      console.error("Pas de response (réseau / function crash)");
-    }
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        error: "Netlify function crashed",
+        message: err.message,
+      }),
+    };
   }
 }
