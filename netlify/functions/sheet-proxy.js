@@ -25,14 +25,12 @@ export async function handler(event) {
       },
       body: text,
     };
-  } catch (err) {
-    console.error("Erreur complète :", err);
-
-    if (err.response) {
-      console.error("Status :", err.response.status);
-      console.error("Data :", err.response.data);
-    } else {
-      console.error("Pas de response (réseau / function crash)");
-    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: error.message,
+      }),
+    };
   }
 }
