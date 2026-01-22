@@ -9,25 +9,25 @@
     <div class="flex flex-col gap-4 w-full max-w-sm">
       <button
         @click="goToForm('form-materiel')"
-        class="bg-[#F79704] text-[#FEFEFE] font-bold py-6 rounded-lg hover:bg-[#84B61C] transition-colors"
+        class="bg-[#F79704] text-[#FEFEFE] font-bold py-6 rounded-lg hover:bg-[#84B61C] transition-colors cursor-pointer"
       >
         Materiel SBPU
       </button>
 
       <button
-        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg hover:bg-[#84B61C] transition-colors"
+        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg cursor-not-allowed"
       >
         Contrôle Aires de jeux (Hebdo)
       </button>
 
       <button
-        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg hover:bg-[#84B61C] transition-colors"
+        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg cursor-not-allowed"
       >
         Activité Equipes SEE
       </button>
 
       <button
-        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg hover:bg-[#84B61C] transition-colors"
+        class="bg-[#585858] text-[#FEFEFE] font-bold py-6 rounded-lg cursor-not-allowed"
       >
         ...
       </button>
