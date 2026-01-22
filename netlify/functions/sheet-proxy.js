@@ -17,15 +17,23 @@ export async function handler(event) {
 
     const text = await response.text();
 
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { success: false, message: "Réponse non JSON : " + text };
+    }
+
     return {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: text,
+      body: JSON.stringify(data),
     };
   } catch (error) {
+    console.error("Erreur complète :", error);
     return {
       statusCode: 500,
       body: JSON.stringify({
