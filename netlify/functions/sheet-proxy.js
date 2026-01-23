@@ -33,11 +33,11 @@ export async function handler(event) {
       body: JSON.stringify(data),
     };
   } catch (error) {
-    console.error("Erreur complète :", error);
     return {
       statusCode: 500,
       body: JSON.stringify({
         error: error.message,
+        errorEvent: error.event || null,
       }),
     };
   }

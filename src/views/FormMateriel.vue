@@ -90,6 +90,7 @@ async function submitForm() {
           "";
     } else {
       message.value = "Erreur : " + res.data.message;
+      console.log("Détails de l'erreur :", res.data);
     }
   } catch (err) {
     message.value = "Erreur de connexion : " + err.message;
