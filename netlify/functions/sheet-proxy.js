@@ -2,7 +2,7 @@ export async function handler(event) {
   try {
     console.log(event);
 
-    if (event.httpMethod !== "POST" || event.httpMethod !== "GET") {
+    if (event.httpMethod !== "POST" && event.httpMethod !== "GET") {
       return {
         statusCode: 405,
         body: "Method Not Allowed",
