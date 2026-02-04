@@ -53,7 +53,6 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useAuth } from "../composables/useAuth";
-import { log } from "console";
 const { userToken } = useAuth();
 
 const materiel = ref("");
