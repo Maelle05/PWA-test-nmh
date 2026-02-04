@@ -34,7 +34,14 @@ export async function handler(event) {
         body: JSON.stringify(data),
       };
     } else if (event.httpMethod == "GET") {
-      console.log(event.body);
+      return {
+        statusCode: 200,
+        headers: {},
+        body: JSON.stringify({
+          message: "GET method not implemented yet.",
+          event: event.body,
+        }),
+      };
     }
   } catch (error) {
     return {
