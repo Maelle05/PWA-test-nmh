@@ -67,7 +67,9 @@ const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
 async function fetchRefDatas() {
   try {
     const res = await axios.get(WEB_APP_URL, {
-      type: "materiel-options",
+      params: {
+        type: "materiels",
+      },
     });
 
     console.log(res.data);
