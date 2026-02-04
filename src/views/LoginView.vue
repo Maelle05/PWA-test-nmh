@@ -36,8 +36,12 @@
       <div class="flex flex-col items-center mb-6">
         <img src="/assets/Logo.png" alt="Logo" class="h-16 mb-3" />
         <h1 class="text-2xl font-bold text-[#2C7626]">
-          Vous êtes connecté en tant que : {{ userToken }}
+          Vous êtes connecté avec le code utilisateur :
         </h1>
+        <span
+          class="text-2xl font-bold text-[#2C7626] text-center w-full mt-3"
+          >{{ userToken }}</span
+        >
       </div>
 
       <button
