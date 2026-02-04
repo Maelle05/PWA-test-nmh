@@ -37,7 +37,6 @@ export async function handler(event) {
       statusCode: 500,
       body: JSON.stringify({
         error: error.message,
-        errorEvent: error.event || null,
       }),
     };
   }

@@ -35,12 +35,6 @@
         class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
       />
 
-      <input
-        v-model="acteur"
-        placeholder="Acteur"
-        class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
-      />
-
       <button
         type="submit"
         class="bg-[#2C7626] text-[#FEFEFE] py-3 rounded-lg font-semibold hover:bg-[#84B61C] transition-colors"
@@ -58,12 +52,13 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useAuth } from "../composables/useAuth";
+const { userToken } = useAuth();
 
 const materiel = ref("");
 const statut = ref("");
 const devis = ref("");
 const engagement = ref("");
-const acteur = ref("");
 const message = ref("");
 
 const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
@@ -75,22 +70,16 @@ async function submitForm() {
       statut: statut.value,
       devis: devis.value,
       engagement: engagement.value,
-      acteur: acteur.value,
+      acteur: userToken.value,
     });
 
     if (res.data.success) {
       message.value = "Données envoyées ✅";
 
       // Reset des champs
-      materiel.value =
-        statut.value =
-        devis.value =
-        engagement.value =
-        acteur.value =
-          "";
+      materiel.value = statut.value = devis.value = engagement.value = "";
     } else {
       message.value = "Erreur : " + res.data.message;
-      console.log("Détails de l'erreur :", res.data);
     }
   } catch (err) {
     message.value = "Erreur de connexion : " + err.message;

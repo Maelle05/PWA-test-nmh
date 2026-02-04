@@ -12,10 +12,16 @@ const routes = [
   {
     path: "/dashboard",
     component: DashboardView,
+    meta: { requiresAuth: true },
   },
   {
     path: "/form-materiel",
     component: FormMateriel,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/login",
+    component: () => import("../views/LoginView.vue"),
   },
 ];
 
@@ -25,7 +31,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  next();
+  const userToken = localStorage.getItem("user_token");
+
+  if (to.meta.requiresAuth && !userToken) {
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;
