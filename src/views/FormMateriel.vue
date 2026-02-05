@@ -9,19 +9,27 @@
       @submit.prevent="submitForm"
       class="flex flex-col text-xl gap-4 w-full max-w-md bg-[#F7F7F7] p-6 rounded-xl shadow-md"
     >
-      <input
+      <select
         v-model="materiel"
-        placeholder="Matériel"
         required
         class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
-      />
+      >
+        <option value="" disabled>Choisir un matériel</option>
+        <option v-for="item in materielsOptions" :key="item" :value="item">
+          {{ item }}
+        </option>
+      </select>
 
-      <input
+      <select
         v-model="statut"
-        placeholder="Statut"
         required
         class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
-      />
+      >
+        <option value="" disabled>Choisir un statut</option>
+        <option v-for="item in statutsOptions" :key="item" :value="item">
+          {{ item }}
+        </option>
+      </select>
 
       <input
         v-model="devis"
@@ -61,6 +69,10 @@ const devis = ref("");
 const engagement = ref("");
 const message = ref("");
 
+// Options pour les select
+const materielsOptions = ref([]);
+const statutsOptions = ref([]);
+
 const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
 
 // Récupérer les données REF_DATAS
@@ -72,12 +84,10 @@ async function fetchRefDatas() {
       },
     });
 
-    console.log(res);
-    // Suppose que ta feuille renvoie un objet { materiels: [...], statuts: [...] }
-    // materielsOptions.value = res.data.materiels || [];
-    // statutsOptions.value = res.data.statuts || [];
+    materielsOptions.value = res.data.materiels || [];
+    statutsOptions.value = res.data.statuts || [];
   } catch (err) {
-    message.value = "Erreur de chargement des données : " + err.message;
+    message.value = "Erreur de chargement des options : " + err.message;
   }
 }
 

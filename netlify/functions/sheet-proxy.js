@@ -34,7 +34,6 @@ export async function handler(event) {
         body: JSON.stringify(data),
       };
     } else if (event.httpMethod == "GET") {
-      console.log(event.queryStringParameters.type);
       const response = await fetch(
         `${process.env.GOOGLE_SCRIPT_URL}?type=${event.queryStringParameters.type}`,
         {
@@ -46,7 +45,6 @@ export async function handler(event) {
       );
 
       const data = await response.json();
-      console.log(data.data);
 
       return {
         statusCode: 200,
