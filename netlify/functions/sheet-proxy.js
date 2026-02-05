@@ -1,7 +1,5 @@
 export async function handler(event) {
   try {
-    console.log(event);
-
     if (event.httpMethod !== "POST" && event.httpMethod !== "GET") {
       return {
         statusCode: 405,
@@ -36,13 +34,31 @@ export async function handler(event) {
         body: JSON.stringify(data),
       };
     } else if (event.httpMethod == "GET") {
+      console.log(event.queryStringParameters);
+      const response = await fetch(process.env.GOOGLE_SCRIPT_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: event.queryStringParameters,
+      });
+
+      const text = await response.text();
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { success: false, message: "Réponse non JSON : " + text };
+      }
+
       return {
         statusCode: 200,
-        headers: {},
-        body: JSON.stringify({
-          message: "GET method not implemented yet.",
-          event: event.body,
-        }),
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       };
     }
   } catch (error) {

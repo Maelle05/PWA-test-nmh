@@ -72,7 +72,7 @@ async function fetchRefDatas() {
       },
     });
 
-    console.log(res.data);
+    console.log(res);
     // Suppose que ta feuille renvoie un objet { materiels: [...], statuts: [...] }
     // materielsOptions.value = res.data.materiels || [];
     // statutsOptions.value = res.data.statuts || [];
