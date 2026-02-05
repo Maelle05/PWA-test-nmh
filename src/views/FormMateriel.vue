@@ -62,7 +62,7 @@
         <span v-if="!sendLoading">Envoyer</span>
         <span
           v-else
-          class="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"
+          class="w-6 h-6 block border-4 m-auto border-white border-t-transparent rounded-full animate-spin"
         ></span>
         <!-- <span v-else>Envoi en cours...</span> -->
       </button>
