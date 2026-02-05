@@ -158,5 +158,6 @@ async function submitForm() {
   --vs-menu-offset-top: 0px;
   --vs-menu-border: solid 1px #585858;
   --vs-background-color: #f7f7f7;
+  --vs-menu-height: 300px;
 }
 </style>
