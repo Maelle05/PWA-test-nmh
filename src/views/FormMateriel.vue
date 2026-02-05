@@ -21,27 +21,21 @@
       @submit.prevent="submitForm"
       class="flex flex-col text-xl gap-4 w-full max-w-md bg-[#F7F7F7] p-6 rounded-xl shadow-md"
     >
-      <select
+      <VueSelect
         v-model="materiel"
-        required
-        class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
-      >
-        <option value="" disabled>Choisir un matériel</option>
-        <option v-for="item in materielsOptions" :key="item" :value="item">
-          {{ item }}
-        </option>
-      </select>
+        :options="
+          materielsOptions.map((item) => ({ label: item, value: item }))
+        "
+        class="custom-select"
+        placeholder="Recherche de matériel..."
+      />
 
-      <select
+      <VueSelect
         v-model="statut"
-        required
-        class="border border-[#585858] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C7626]"
-      >
-        <option value="" disabled>Choisir un statut</option>
-        <option v-for="item in statutsOptions" :key="item" :value="item">
-          {{ item }}
-        </option>
-      </select>
+        class="custom-select"
+        :options="statutsOptions.map((item) => ({ label: item, value: item }))"
+        placeholder="Recherche de statut…"
+      />
 
       <input
         v-model="devis"
@@ -78,6 +72,9 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuth } from "../composables/useAuth";
+import VueSelect from "vue3-select-component";
+import "vue3-select-component/styles";
+
 const { userToken } = useAuth();
 
 const materiel = ref("");
@@ -148,3 +145,18 @@ async function submitForm() {
   }
 }
 </script>
+
+<style scoped>
+.custom-select {
+  --vs-border: 1px solid #585858;
+  --vs-border-radius: 8px;
+  --vs-padding: 0.5rem 1rem;
+  --vs-placeholder-color: #52525b84;
+  --vs-outline-color: #2c7626;
+  --vs-outline-width: 2px;
+  --vs-font-size: none;
+  --vs-menu-offset-top: 0px;
+  --vs-menu-border: solid 1px #585858;
+  --vs-background-color: #f7f7f7;
+}
+</style>
