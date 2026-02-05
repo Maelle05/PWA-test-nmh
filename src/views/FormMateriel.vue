@@ -5,7 +5,13 @@
       Materiel SBPU
     </h1>
 
+    <!-- Affiche un loader tant que les options ne sont pas encore chargées -->
+    <div v-if="loading" class="text-[#F7F7F7] text-xl mt-10">
+      Chargement des options...
+    </div>
+
     <form
+      v-else
       @submit.prevent="submitForm"
       class="flex flex-col text-xl gap-4 w-full max-w-md bg-[#F7F7F7] p-6 rounded-xl shadow-md"
     >
@@ -73,6 +79,9 @@ const message = ref("");
 const materielsOptions = ref([]);
 const statutsOptions = ref([]);
 
+// Loading
+const loading = ref(true);
+
 const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
 
 // Récupérer les données REF_DATAS
@@ -88,6 +97,8 @@ async function fetchRefDatas() {
     statutsOptions.value = res.data.statuts || [];
   } catch (err) {
     message.value = "Erreur de chargement des options : " + err.message;
+  } finally {
+    loading.value = false; // Fin du chargement
   }
 }
 
