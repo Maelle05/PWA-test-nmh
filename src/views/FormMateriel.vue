@@ -6,7 +6,10 @@
     </h1>
 
     <!-- Affiche un loader tant que les options ne sont pas encore chargées -->
-    <div v-if="loading" class="text-[#F7F7F7] text-xl mt-10">
+    <div
+      v-if="loading"
+      class="text-[#F7F7F7] text-xl mt-20 flex flex-col items-center gap-4"
+    >
       <div
         class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"
       ></div>
@@ -56,7 +59,12 @@
         type="submit"
         class="bg-[#2C7626] text-[#FEFEFE] py-3 rounded-lg font-semibold hover:bg-[#84B61C] transition-colors"
       >
-        Envoyer
+        <span v-if="!sendLoading">Envoyer</span>
+        <span
+          v-else
+          class="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"
+        ></span>
+        <!-- <span v-else>Envoi en cours...</span> -->
       </button>
     </form>
 
@@ -84,6 +92,7 @@ const statutsOptions = ref([]);
 
 // Loading
 const loading = ref(true);
+const sendLoading = ref(false);
 
 const WEB_APP_URL = "/.netlify/functions/sheet-proxy";
 
@@ -111,6 +120,7 @@ onMounted(() => {
 
 async function submitForm() {
   try {
+    sendLoading.value = true; // Affiche le loader d'envoi
     const res = await axios.post(WEB_APP_URL, {
       materiel: materiel.value,
       statut: statut.value,
@@ -120,14 +130,20 @@ async function submitForm() {
     });
 
     if (res.data.success) {
+      sendLoading.value = false; // Cache le loader d'envoi
       message.value = "Données envoyées ✅";
 
       // Reset des champs
       materiel.value = statut.value = devis.value = engagement.value = "";
+      setTimeout(() => {
+        message.value = "";
+      }, 5000);
     } else {
+      sendLoading.value = false; // Cache le loader d'envoi
       message.value = "Erreur : " + res.data.message;
     }
   } catch (err) {
+    sendLoading.value = false; // Cache le loader d'envoi
     message.value = "Erreur de connexion : " + err.message;
   }
 }
