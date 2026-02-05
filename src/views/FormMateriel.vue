@@ -7,6 +7,9 @@
 
     <!-- Affiche un loader tant que les options ne sont pas encore chargées -->
     <div v-if="loading" class="text-[#F7F7F7] text-xl mt-10">
+      <div
+        class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"
+      ></div>
       Chargement des options...
     </div>
 
